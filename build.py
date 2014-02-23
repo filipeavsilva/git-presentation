@@ -4,13 +4,21 @@ from os import path
 import re
 
 include_folder = 'slides'
-include_templates = ['{}.html', '{}.md']
+include_templates = [
+    {
+        "filename": '{}.html',
+        "template": '{}'
+    },
+    {
+        "filename": '{}.md',
+        "template": '<script type="text/template">\n{}\n</script>'
+    }]
 include_regex = re.compile('@@([a-zA-Z0-9-_]+)')
 
 in_file = 'index.html'
 out_folder = '../dist'
 out_file_name = 'index.html'
-dirs_to_copy = ['css', 'js', 'lib', 'plugin']
+dirs_to_copy = ['css', 'js', 'lib', 'plugin', 'img']
 
 def main():
     print('Copying static directories...')
@@ -39,10 +47,12 @@ def processIncludeMatch(match):
 
 def includeFile(name):
     filename = ''
+    template = ''
     exists = False
 
-    for template in include_templates:
-        filename = path.join(include_folder, template.format(name))
+    for template_dict in include_templates:
+        filename = path.join(include_folder, template_dict['filename'].format(name))
+        template = template_dict['template']
         if path.isfile(filename):
             exists = True
             break
@@ -51,7 +61,7 @@ def includeFile(name):
         print('>> File {} included'.format(filename))
 
         with open(filename, 'r') as f:
-            return f.read()
+            return template.format(f.read())
 
 
 main()
