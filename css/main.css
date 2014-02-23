@@ -1,0 +1,3 @@
+.link-img:before {
+    content: url('../img/link.png');
+}
