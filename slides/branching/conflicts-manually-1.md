@@ -1,7 +1,7 @@
 #Branching
 ###Solving Conflicts manually
 
-When conflicts arise, both conflicting changes are left in the file, marked with which commit they belong to:
+Conflicting changes are left in the file, marked with the commit they belong to:
 
 ![](img/branching/conflicts-manually.png)
 

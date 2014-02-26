@@ -13,7 +13,7 @@ include_templates = [
         "filename": '{}.md',
         "template": '<script type="text/template">\n{}\n</script>'
     }]
-include_regex = re.compile('@@([a-zA-Z0-9-_]+)')
+include_regex = re.compile('@@([a-zA-Z0-9-_/]+)')
 
 in_file = 'index.html'
 out_folder = '../dist'
